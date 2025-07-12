@@ -2,7 +2,8 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { setupAuth, isAuthenticated } from "./replitAuth";
-import { therabotService } from "./services/anthropic";
+import { isAdminOnly } from "./adminMiddleware";
+import { therabotService } from "./services/openai";
 import {
   insertTherapySessionSchema,
   insertMoodEntrySchema,
@@ -17,7 +18,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   await setupAuth(app);
 
   // Auth routes
-  app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
+  app.get('/api/auth/user', isAuthenticated, isAdminOnly, async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
       const user = await storage.getUser(userId);
@@ -28,8 +29,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Admin route to promote user to admin (for initial setup)
+  app.post('/api/admin/promote-self', isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const userEmail = req.user.claims.email;
+      
+      // Only allow the first user or specific email to become admin
+      const existingUser = await storage.getUser(userId);
+      if (!existingUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      // Make the current user admin
+      await storage.upsertUser({
+        ...existingUser,
+        isAdmin: true,
+      });
+      
+      res.json({ message: "Admin privileges granted" });
+    } catch (error) {
+      console.error("Error promoting user to admin:", error);
+      res.status(500).json({ message: "Failed to grant admin privileges" });
+    }
+  });
+
   // Therapist routes
-  app.get('/api/therapists', async (req, res) => {
+  app.get('/api/therapists', isAdminOnly, async (req, res) => {
     try {
       const { specialization, location, availability } = req.query;
       const therapists = await storage.getTherapists({

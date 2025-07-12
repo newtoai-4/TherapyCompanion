@@ -37,6 +37,7 @@ export const users = pgTable("users", {
   region: varchar("region"),
   country: varchar("country"),
   allowLocationAccess: boolean("allow_location_access").default(false),
+  isAdmin: boolean("is_admin").default(false),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });

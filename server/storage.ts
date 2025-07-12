@@ -204,6 +204,7 @@ export class DatabaseStorage implements IStorage {
         authorRegion: users.region,
         authorCountry: users.country,
         authorAllowLocationAccess: users.allowLocationAccess,
+        authorIsAdmin: users.isAdmin,
         authorCreatedAt: users.createdAt,
         authorUpdatedAt: users.updatedAt,
       })
@@ -235,6 +236,7 @@ export class DatabaseStorage implements IStorage {
         region: row.authorRegion,
         country: row.authorCountry,
         allowLocationAccess: row.authorAllowLocationAccess,
+        isAdmin: row.authorIsAdmin,
         createdAt: row.authorCreatedAt,
         updatedAt: row.authorUpdatedAt,
       } : undefined
@@ -265,6 +267,7 @@ export class DatabaseStorage implements IStorage {
         authorRegion: users.region,
         authorCountry: users.country,
         authorAllowLocationAccess: users.allowLocationAccess,
+        authorIsAdmin: users.isAdmin,
         authorCreatedAt: users.createdAt,
         authorUpdatedAt: users.updatedAt,
       })
@@ -291,6 +294,7 @@ export class DatabaseStorage implements IStorage {
         region: row.authorRegion,
         country: row.authorCountry,
         allowLocationAccess: row.authorAllowLocationAccess,
+        isAdmin: row.authorIsAdmin,
         createdAt: row.authorCreatedAt,
         updatedAt: row.authorUpdatedAt,
       } : undefined

@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(142, 71%, 45%);
+  --primary-foreground: hsl(144, 100%, 99%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+  
+  /* Therapy-specific colors */
+  --therapy-teal: hsl(142, 71%, 45%);
+  --therapy-teal-light: hsl(142, 71%, 65%);
+  --therapy-blue: hsl(217, 91%, 60%);
+  --therapy-blue-light: hsl(217, 91%, 75%);
+  --therapy-yellow: hsl(38, 92%, 50%);
+  --therapy-yellow-light: hsl(48, 100%, 88%);
+  --therapy-gray: hsl(215, 16%, 47%);
+  --therapy-gray-light: hsl(220, 13%, 98%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(142, 71%, 45%);
+  --primary-foreground: hsl(144, 100%, 99%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .therapy-teal {
+    color: var(--therapy-teal);
+  }
+  
+  .bg-therapy-teal {
+    background-color: var(--therapy-teal);
+  }
+  
+  .border-therapy-teal {
+    border-color: var(--therapy-teal);
+  }
+  
+  .therapy-blue {
+    color: var(--therapy-blue);
+  }
+  
+  .bg-therapy-blue {
+    background-color: var(--therapy-blue);
+  }
+  
+  .therapy-yellow {
+    color: var(--therapy-yellow);
+  }
+  
+  .bg-therapy-yellow {
+    background-color: var(--therapy-yellow);
+  }
+  
+  .therapy-gray {
+    color: var(--therapy-gray);
+  }
+  
+  .bg-therapy-gray-light {
+    background-color: var(--therapy-gray-light);
+  }
+  
+  .hover\:bg-therapy-teal-light:hover {
+    background-color: var(--therapy-teal-light);
+  }
+  
+  .hover\:bg-therapy-blue-light:hover {
+    background-color: var(--therapy-blue-light);
+  }
+  
+  .hover\:text-therapy-teal:hover {
+    color: var(--therapy-teal);
+  }
+  
+  .hover\:text-therapy-blue:hover {
+    color: var(--therapy-blue);
+  }
+}

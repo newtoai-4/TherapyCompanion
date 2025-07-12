@@ -21,7 +21,7 @@ function Router() {
       <div className="min-h-screen flex items-center justify-center bg-therapy-gray-light">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-therapy-teal border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-therapy-gray">Loading MindBridge...</p>
+          <p className="text-therapy-gray">Loading MindHaven...</p>
         </div>
       </div>
     );

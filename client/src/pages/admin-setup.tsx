@@ -72,7 +72,7 @@ export default function AdminSetup() {
         <CardHeader className="text-center">
           <CardTitle className="flex items-center justify-center gap-2">
             <Shield className="h-6 w-6 text-blue-600" />
-            MindBridge Admin Setup
+            MindHaven Admin Setup
           </CardTitle>
         </CardHeader>
         <CardContent className="text-center space-y-6">
@@ -84,7 +84,7 @@ export default function AdminSetup() {
                   Admin Access Granted!
                 </h3>
                 <p className="text-gray-600 mt-2">
-                  You now have full access to MindBridge. Please refresh the page to continue.
+                  You now have full access to MindHaven. Please refresh the page to continue.
                 </p>
               </div>
               <Button 
@@ -98,7 +98,7 @@ export default function AdminSetup() {
             <div className="space-y-4">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">
-                  Welcome to MindBridge
+                  Welcome to MindHaven
                 </h3>
                 <p className="text-gray-600 mt-2">
                   You're the first user! Click below to grant yourself admin privileges and gain full access to the platform.

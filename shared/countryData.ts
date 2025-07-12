@@ -157,7 +157,7 @@ export const COUNTRIES: Country[] = [
   { name: "Nepal", code: "NP", regions: ["Kathmandu", "Pokhara", "Lalitpur", "Bharatpur"] },
   { name: "Netherlands", code: "NL", regions: ["Amsterdam", "Rotterdam", "The Hague", "Utrecht"] },
   { name: "New Zealand", code: "NZ", regions: ["Auckland", "Wellington", "Christchurch", "Hamilton"] },
-  { name: "Nigeria", code: "NG", regions: ["Lagos", "Kano", "Ibadan", "Abuja"] },
+
   { name: "Norway", code: "NO", regions: ["Oslo", "Bergen", "Stavanger", "Trondheim"] },
   { name: "Pakistan", code: "PK", regions: ["Karachi", "Lahore", "Faisalabad", "Rawalpindi"] },
   { name: "Peru", code: "PE", regions: ["Lima", "Arequipa", "Trujillo", "Chiclayo"] },

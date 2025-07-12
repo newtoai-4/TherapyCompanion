@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { setupAuth, isAuthenticated } from "./replitAuth";
-import { therabotService } from "./services/openai";
+import { therabotService } from "./services/anthropic";
 import {
   insertTherapySessionSchema,
   insertMoodEntrySchema,
@@ -216,7 +216,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       let aiSessionSummary = '';
       if (aiSessions.length > 0) {
-        const messages = aiSessions.flatMap(s => s.sessionData?.messages || []);
+        const messages = aiSessions.flatMap(s => (s.sessionData as any)?.messages || []);
         aiSessionSummary = await therabotService.generateSessionSummary(messages);
       }
 

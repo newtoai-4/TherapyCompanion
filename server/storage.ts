@@ -87,17 +87,20 @@ export class DatabaseStorage implements IStorage {
 
   // Therapist operations
   async getTherapists(filters?: { specialization?: string; location?: string; availability?: string }): Promise<Therapist[]> {
-    let query = db.select().from(therapists).where(eq(therapists.isActive, true));
+    let query = db.select().from(therapists);
+    let whereConditions = [eq(therapists.isActive, true)];
     
     if (filters?.specialization) {
-      query = query.where(sql`${therapists.specializations} @> ARRAY[${filters.specialization}]`);
+      whereConditions.push(sql`${therapists.specializations} @> ARRAY[${filters.specialization}]`);
     }
     
     if (filters?.location) {
-      query = query.where(like(therapists.location, `%${filters.location}%`));
+      whereConditions.push(like(therapists.location, `%${filters.location}%`));
     }
     
-    return await query.orderBy(desc(therapists.rating));
+    return await query
+      .where(and(...whereConditions))
+      .orderBy(desc(therapists.rating));
   }
 
   async getTherapist(id: number): Promise<Therapist | undefined> {
@@ -173,7 +176,13 @@ export class DatabaseStorage implements IStorage {
 
   // Community operations
   async getCommunityPosts(category?: string, limit = 20): Promise<(CommunityPost & { author?: User })[]> {
-    let query = db
+    let whereConditions = [eq(communityPosts.isModerated, true)];
+    
+    if (category) {
+      whereConditions.push(eq(communityPosts.category, category));
+    }
+
+    const results = await db
       .select({
         id: communityPosts.id,
         userId: communityPosts.userId,
@@ -186,22 +195,50 @@ export class DatabaseStorage implements IStorage {
         isModerated: communityPosts.isModerated,
         createdAt: communityPosts.createdAt,
         updatedAt: communityPosts.updatedAt,
-        author: {
-          id: users.id,
-          firstName: users.firstName,
-          lastName: users.lastName,
-          profileImageUrl: users.profileImageUrl,
-        }
+        authorId: users.id,
+        authorEmail: users.email,
+        authorFirstName: users.firstName,
+        authorLastName: users.lastName,
+        authorProfileImageUrl: users.profileImageUrl,
+        authorAge: users.age,
+        authorRegion: users.region,
+        authorCountry: users.country,
+        authorAllowLocationAccess: users.allowLocationAccess,
+        authorCreatedAt: users.createdAt,
+        authorUpdatedAt: users.updatedAt,
       })
       .from(communityPosts)
       .leftJoin(users, eq(communityPosts.userId, users.id))
-      .where(eq(communityPosts.isModerated, true));
+      .where(and(...whereConditions))
+      .orderBy(desc(communityPosts.createdAt))
+      .limit(limit);
 
-    if (category) {
-      query = query.where(eq(communityPosts.category, category));
-    }
-
-    return await query.orderBy(desc(communityPosts.createdAt)).limit(limit);
+    return results.map(row => ({
+      id: row.id,
+      userId: row.userId,
+      title: row.title,
+      content: row.content,
+      category: row.category,
+      isAnonymous: row.isAnonymous,
+      likesCount: row.likesCount,
+      commentsCount: row.commentsCount,
+      isModerated: row.isModerated,
+      createdAt: row.createdAt,
+      updatedAt: row.updatedAt,
+      author: row.authorId ? {
+        id: row.authorId,
+        email: row.authorEmail,
+        firstName: row.authorFirstName,
+        lastName: row.authorLastName,
+        profileImageUrl: row.authorProfileImageUrl,
+        age: row.authorAge,
+        region: row.authorRegion,
+        country: row.authorCountry,
+        allowLocationAccess: row.authorAllowLocationAccess,
+        createdAt: row.authorCreatedAt,
+        updatedAt: row.authorUpdatedAt,
+      } : undefined
+    }));
   }
 
   async createCommunityPost(postData: InsertCommunityPost): Promise<CommunityPost> {
@@ -210,7 +247,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getPostComments(postId: number): Promise<(CommunityComment & { author?: User })[]> {
-    return await db
+    const results = await db
       .select({
         id: communityComments.id,
         postId: communityComments.postId,
@@ -219,17 +256,45 @@ export class DatabaseStorage implements IStorage {
         isAnonymous: communityComments.isAnonymous,
         likesCount: communityComments.likesCount,
         createdAt: communityComments.createdAt,
-        author: {
-          id: users.id,
-          firstName: users.firstName,
-          lastName: users.lastName,
-          profileImageUrl: users.profileImageUrl,
-        }
+        authorId: users.id,
+        authorEmail: users.email,
+        authorFirstName: users.firstName,
+        authorLastName: users.lastName,
+        authorProfileImageUrl: users.profileImageUrl,
+        authorAge: users.age,
+        authorRegion: users.region,
+        authorCountry: users.country,
+        authorAllowLocationAccess: users.allowLocationAccess,
+        authorCreatedAt: users.createdAt,
+        authorUpdatedAt: users.updatedAt,
       })
       .from(communityComments)
       .leftJoin(users, eq(communityComments.userId, users.id))
       .where(eq(communityComments.postId, postId))
       .orderBy(desc(communityComments.createdAt));
+
+    return results.map(row => ({
+      id: row.id,
+      postId: row.postId,
+      userId: row.userId,
+      content: row.content,
+      isAnonymous: row.isAnonymous,
+      likesCount: row.likesCount,
+      createdAt: row.createdAt,
+      author: row.authorId ? {
+        id: row.authorId,
+        email: row.authorEmail,
+        firstName: row.authorFirstName,
+        lastName: row.authorLastName,
+        profileImageUrl: row.authorProfileImageUrl,
+        age: row.authorAge,
+        region: row.authorRegion,
+        country: row.authorCountry,
+        allowLocationAccess: row.authorAllowLocationAccess,
+        createdAt: row.authorCreatedAt,
+        updatedAt: row.authorUpdatedAt,
+      } : undefined
+    }));
   }
 
   async createCommunityComment(commentData: InsertCommunityComment): Promise<CommunityComment> {

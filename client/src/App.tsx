@@ -9,6 +9,8 @@ import Dashboard from "@/pages/dashboard";
 import Therapists from "@/pages/therapists";
 import Community from "@/pages/community";
 import Chat from "@/pages/chat";
+import AdminSetup from "@/pages/admin-setup";
+import AccessDenied from "@/pages/access-denied";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -27,6 +29,8 @@ function Router() {
 
   return (
     <Switch>
+      <Route path="/admin-setup" component={AdminSetup} />
+      <Route path="/access-denied" component={AccessDenied} />
       {!isAuthenticated ? (
         <Route path="/" component={Landing} />
       ) : (

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { useQuery } from "@tanstack/react-query";
-import { isUnauthorizedError } from "@/lib/authUtils";
+import { isUnauthorizedError, isForbiddenError } from "@/lib/authUtils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MoodTracker } from "@/components/ui/mood-tracker";
@@ -13,19 +13,19 @@ export default function Dashboard() {
   const { toast } = useToast();
   const { user, isAuthenticated, isLoading } = useAuth();
 
-  const { data: recentSessions } = useQuery({
+  const { data: recentSessions, error: sessionsError } = useQuery({
     queryKey: ["/api/sessions"],
     enabled: isAuthenticated,
     retry: false,
   });
 
-  const { data: moodEntries } = useQuery({
+  const { data: moodEntries, error: moodError } = useQuery({
     queryKey: ["/api/mood"],
     enabled: isAuthenticated,
     retry: false,
   });
 
-  const { data: therapists } = useQuery({
+  const { data: therapists, error: therapistsError } = useQuery({
     queryKey: ["/api/therapists"],
     enabled: isAuthenticated,
     retry: false,
@@ -44,6 +44,24 @@ export default function Dashboard() {
       return;
     }
   }, [isAuthenticated, isLoading, toast]);
+
+  // Check for admin access errors
+  useEffect(() => {
+    const errors = [sessionsError, moodError, therapistsError].filter(Boolean);
+    for (const error of errors) {
+      if (isForbiddenError(error as Error)) {
+        toast({
+          title: "Access Denied",
+          description: "Admin access required. Redirecting...",
+          variant: "destructive",
+        });
+        setTimeout(() => {
+          window.location.href = "/access-denied";
+        }, 1000);
+        return;
+      }
+    }
+  }, [sessionsError, moodError, therapistsError, toast]);
 
   if (isLoading) {
     return (

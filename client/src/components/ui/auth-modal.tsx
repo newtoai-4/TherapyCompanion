@@ -89,7 +89,7 @@ export function AuthModal({ isOpen, onClose, mode, onModeChange }: AuthModalProp
     },
     onSuccess: () => {
       toast({
-        title: "Welcome to MindBridge!",
+        title: "Welcome to MindHaven!",
         description: "Your account has been created successfully.",
       });
       queryClient.invalidateQueries({ queryKey: ["/api/auth/user"] });

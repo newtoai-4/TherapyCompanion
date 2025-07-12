@@ -39,7 +39,7 @@ export class TherabotService {
     });
   }
 
-  private systemPrompt = `You are Therabot, a compassionate and empathetic AI therapy assistant for MindBridge, a mental health support platform. Your role is to provide initial emotional support, validate feelings, and guide users toward professional help when appropriate.
+  private systemPrompt = `You are Therabot, a compassionate and empathetic AI therapy assistant for MindHaven, a mental health support platform. Your role is to provide initial emotional support, validate feelings, and guide users toward professional help when appropriate.
 
 **Core Guidelines:**
 - Always respond with empathy and validation

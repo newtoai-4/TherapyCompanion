@@ -1,8 +1,8 @@
-# MindBridge - Mental Health Support Platform
+# MindHaven - Mental Health Support Platform
 
 ## Overview
 
-MindBridge is a comprehensive mental health support platform that connects users with therapy resources, AI-powered emotional support, and community features. The application provides a bridge between initial mental health support and professional therapy services, featuring mood tracking, journal entries, therapist discovery, community forums, and an AI therapy assistant called "Therabot."
+MindHaven is a comprehensive mental health support platform that connects users with therapy resources, AI-powered emotional support, and community features. The application provides a bridge between initial mental health support and professional therapy services, featuring mood tracking, journal entries, therapist discovery, community forums, and an AI therapy assistant called "Therabot."
 
 ## User Preferences
 

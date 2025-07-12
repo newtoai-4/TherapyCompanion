@@ -32,7 +32,7 @@ export default function Landing() {
               <div className="w-10 h-10 bg-gradient-to-br from-therapy-teal to-therapy-blue rounded-lg flex items-center justify-center">
                 <Heart className="text-white h-6 w-6" />
               </div>
-              <span className="text-xl font-semibold text-gray-900">MindBridge</span>
+              <span className="text-xl font-semibold text-gray-900">MindHaven</span>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
@@ -68,7 +68,7 @@ export default function Landing() {
             <div className="space-y-8">
               <div className="space-y-4">
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-                  Welcome to <span className="text-therapy-teal">MindBridge</span> — your safe space for support, healing, and personal growth
+                  Welcome to <span className="text-therapy-teal">MindHaven</span> — your safe space for support, healing, and personal growth
                 </h1>
                 <p className="text-xl text-therapy-gray leading-relaxed">
                   Let's start this journey together. Connect with our empathetic AI assistant and licensed mental health professionals who understand your unique needs.
@@ -241,7 +241,7 @@ export default function Landing() {
           <div className="border-t border-gray-800 mt-12 pt-8">
             <div className="md:flex md:items-center md:justify-between">
               <div className="text-sm text-gray-400">
-                <p>© 2025 MindBridge. All rights reserved.</p>
+                <p>© 2025 MindHaven. All rights reserved.</p>
                 <p className="mt-1">
                   <strong>Disclaimer:</strong> AI support is not a replacement for professional therapy. If you're experiencing a mental health crisis, please contact emergency services or a crisis hotline immediately.
                 </p>

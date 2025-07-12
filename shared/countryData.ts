@@ -5,20 +5,37 @@ export interface Country {
 }
 
 export const COUNTRIES: Country[] = [
+  { name: "Afghanistan", code: "AF", regions: ["Kabul", "Kandahar", "Herat", "Mazar-i-Sharif"] },
+  { name: "Albania", code: "AL", regions: ["Tirana", "Durrës", "Vlorë", "Shkodër"] },
+  { name: "Algeria", code: "DZ", regions: ["Algiers", "Oran", "Constantine", "Annaba"] },
+  { name: "Argentina", code: "AR", regions: ["Buenos Aires", "Córdoba", "Santa Fe", "Mendoza"] },
+  { name: "Armenia", code: "AM", regions: ["Yerevan", "Gyumri", "Vanadzor", "Vagharshapat"] },
   {
-    name: "United States",
-    code: "US",
+    name: "Australia",
+    code: "AU",
     regions: [
-      "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
-      "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", 
-      "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", 
-      "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", 
-      "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", 
-      "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", 
-      "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", 
-      "Wisconsin", "Wyoming", "District of Columbia"
+      "New South Wales", "Victoria", "Queensland", "South Australia", "Western Australia",
+      "Tasmania", "Northern Territory", "Australian Capital Territory"
     ]
   },
+  { name: "Austria", code: "AT", regions: ["Vienna", "Salzburg", "Innsbruck", "Graz"] },
+  { name: "Azerbaijan", code: "AZ", regions: ["Baku", "Ganja", "Sumgayit", "Mingachevir"] },
+  { name: "Bahrain", code: "BH", regions: ["Manama", "Muharraq", "Riffa", "Hamad Town"] },
+  { name: "Bangladesh", code: "BD", regions: ["Dhaka", "Chittagong", "Sylhet", "Khulna"] },
+  { name: "Belgium", code: "BE", regions: ["Brussels", "Antwerp", "Ghent", "Charleroi"] },
+  { name: "Bolivia", code: "BO", regions: ["La Paz", "Santa Cruz", "Cochabamba", "Sucre"] },
+  {
+    name: "Brazil",
+    code: "BR",
+    regions: [
+      "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo",
+      "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará",
+      "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte",
+      "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins"
+    ]
+  },
+  { name: "Bulgaria", code: "BG", regions: ["Sofia", "Plovdiv", "Varna", "Burgas"] },
+  { name: "Cambodia", code: "KH", regions: ["Phnom Penh", "Siem Reap", "Battambang", "Sihanoukville"] },
   {
     name: "Canada",
     code: "CA",
@@ -28,19 +45,33 @@ export const COUNTRIES: Country[] = [
       "Quebec", "Saskatchewan", "Yukon"
     ]
   },
+  { name: "Chile", code: "CL", regions: ["Santiago", "Valparaíso", "Concepción", "La Serena"] },
   {
-    name: "United Kingdom",
-    code: "GB",
+    name: "China",
+    code: "CN",
     regions: [
-      "England", "Scotland", "Wales", "Northern Ireland"
+      "Beijing", "Shanghai", "Tianjin", "Chongqing", "Hebei", "Shanxi", "Liaoning", "Jilin",
+      "Heilongjiang", "Jiangsu", "Zhejiang", "Anhui", "Fujian", "Jiangxi", "Shandong", "Henan",
+      "Hubei", "Hunan", "Guangdong", "Hainan", "Sichuan", "Guizhou", "Yunnan", "Shaanxi",
+      "Gansu", "Qinghai", "Taiwan", "Inner Mongolia", "Guangxi", "Tibet", "Ningxia", "Xinjiang"
     ]
   },
+  { name: "Colombia", code: "CO", regions: ["Bogotá", "Medellín", "Cali", "Barranquilla"] },
+  { name: "Croatia", code: "HR", regions: ["Zagreb", "Split", "Rijeka", "Osijek"] },
+  { name: "Czech Republic", code: "CZ", regions: ["Prague", "Brno", "Ostrava", "Plzen"] },
+  { name: "Denmark", code: "DK", regions: ["Copenhagen", "Aarhus", "Odense", "Aalborg"] },
+  { name: "Ecuador", code: "EC", regions: ["Quito", "Guayaquil", "Cuenca", "Santo Domingo"] },
+  { name: "Egypt", code: "EG", regions: ["Cairo", "Alexandria", "Giza", "Luxor"] },
+  { name: "Estonia", code: "EE", regions: ["Tallinn", "Tartu", "Narva", "Pärnu"] },
+  { name: "Ethiopia", code: "ET", regions: ["Addis Ababa", "Dire Dawa", "Mekelle", "Gondar"] },
+  { name: "Finland", code: "FI", regions: ["Helsinki", "Espoo", "Tampere", "Vantaa"] },
   {
-    name: "Australia",
-    code: "AU",
+    name: "France",
+    code: "FR",
     regions: [
-      "New South Wales", "Victoria", "Queensland", "Western Australia", "South Australia",
-      "Tasmania", "Northern Territory", "Australian Capital Territory"
+      "Auvergne-Rhône-Alpes", "Bourgogne-Franche-Comté", "Brittany", "Centre-Val de Loire",
+      "Corsica", "Grand Est", "Hauts-de-France", "Île-de-France", "Normandy", "Nouvelle-Aquitaine",
+      "Occitanie", "Pays de la Loire", "Provence-Alpes-Côte d'Azur"
     ]
   },
   {
@@ -52,32 +83,10 @@ export const COUNTRIES: Country[] = [
       "Rhineland-Palatinate", "Saarland", "Saxony", "Saxony-Anhalt", "Schleswig-Holstein", "Thuringia"
     ]
   },
-  {
-    name: "France",
-    code: "FR",
-    regions: [
-      "Auvergne-Rhône-Alpes", "Bourgogne-Franche-Comté", "Brittany", "Centre-Val de Loire",
-      "Corsica", "Grand Est", "Hauts-de-France", "Île-de-France", "Normandy", "Nouvelle-Aquitaine",
-      "Occitanie", "Pays de la Loire", "Provence-Alpes-Côte d'Azur"
-    ]
-  },
-  {
-    name: "Japan",
-    code: "JP",
-    regions: [
-      "Hokkaido", "Tohoku", "Kanto", "Chubu", "Kansai", "Chugoku", "Shikoku", "Kyushu"
-    ]
-  },
-  {
-    name: "Nigeria",
-    code: "NG",
-    regions: [
-      "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno",
-      "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigawa",
-      "Kaduna", "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger",
-      "Ogun", "Ondo", "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara"
-    ]
-  },
+  { name: "Ghana", code: "GH", regions: ["Accra", "Kumasi", "Tamale", "Sekondi-Takoradi"] },
+  { name: "Greece", code: "GR", regions: ["Athens", "Thessaloniki", "Patras", "Heraklion"] },
+  { name: "Hungary", code: "HU", regions: ["Budapest", "Debrecen", "Szeged", "Miskolc"] },
+  { name: "Iceland", code: "IS", regions: ["Reykjavik", "Kópavogur", "Hafnarfjörður", "Akureyri"] },
   {
     name: "India",
     code: "IN",
@@ -89,60 +98,19 @@ export const COUNTRIES: Country[] = [
       "Uttarakhand", "West Bengal", "Delhi", "Jammu and Kashmir", "Ladakh"
     ]
   },
-  {
-    name: "Brazil",
-    code: "BR",
-    regions: [
-      "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo",
-      "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará",
-      "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte",
-      "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins"
-    ]
-  },
-  {
-    name: "China",
-    code: "CN",
-    regions: [
-      "Beijing", "Shanghai", "Tianjin", "Chongqing", "Hebei", "Shanxi", "Liaoning", "Jilin",
-      "Heilongjiang", "Jiangsu", "Zhejiang", "Anhui", "Fujian", "Jiangxi", "Shandong", "Henan",
-      "Hubei", "Hunan", "Guangdong", "Hainan", "Sichuan", "Guizhou", "Yunnan", "Shaanxi",
-      "Gansu", "Qinghai", "Taiwan", "Inner Mongolia", "Guangxi", "Tibet", "Ningxia", "Xinjiang"
-    ]
-  },
-  // Adding more countries to reach 100+
-  { name: "Afghanistan", code: "AF", regions: ["Kabul", "Kandahar", "Herat", "Mazar-i-Sharif"] },
-  { name: "Albania", code: "AL", regions: ["Tirana", "Durrës", "Vlorë", "Shkodër"] },
-  { name: "Algeria", code: "DZ", regions: ["Algiers", "Oran", "Constantine", "Annaba"] },
-  { name: "Argentina", code: "AR", regions: ["Buenos Aires", "Córdoba", "Santa Fe", "Mendoza"] },
-  { name: "Armenia", code: "AM", regions: ["Yerevan", "Gyumri", "Vanadzor", "Vagharshapat"] },
-  { name: "Austria", code: "AT", regions: ["Vienna", "Salzburg", "Innsbruck", "Graz"] },
-  { name: "Azerbaijan", code: "AZ", regions: ["Baku", "Ganja", "Sumgayit", "Mingachevir"] },
-  { name: "Bahrain", code: "BH", regions: ["Manama", "Muharraq", "Riffa", "Hamad Town"] },
-  { name: "Bangladesh", code: "BD", regions: ["Dhaka", "Chittagong", "Sylhet", "Khulna"] },
-  { name: "Belgium", code: "BE", regions: ["Brussels", "Antwerp", "Ghent", "Charleroi"] },
-  { name: "Bolivia", code: "BO", regions: ["La Paz", "Santa Cruz", "Cochabamba", "Sucre"] },
-  { name: "Bulgaria", code: "BG", regions: ["Sofia", "Plovdiv", "Varna", "Burgas"] },
-  { name: "Cambodia", code: "KH", regions: ["Phnom Penh", "Siem Reap", "Battambang", "Sihanoukville"] },
-  { name: "Chile", code: "CL", regions: ["Santiago", "Valparaíso", "Concepción", "La Serena"] },
-  { name: "Colombia", code: "CO", regions: ["Bogotá", "Medellín", "Cali", "Barranquilla"] },
-  { name: "Croatia", code: "HR", regions: ["Zagreb", "Split", "Rijeka", "Osijek"] },
-  { name: "Czech Republic", code: "CZ", regions: ["Prague", "Brno", "Ostrava", "Plzen"] },
-  { name: "Denmark", code: "DK", regions: ["Copenhagen", "Aarhus", "Odense", "Aalborg"] },
-  { name: "Ecuador", code: "EC", regions: ["Quito", "Guayaquil", "Cuenca", "Santo Domingo"] },
-  { name: "Egypt", code: "EG", regions: ["Cairo", "Alexandria", "Giza", "Luxor"] },
-  { name: "Estonia", code: "EE", regions: ["Tallinn", "Tartu", "Narva", "Pärnu"] },
-  { name: "Ethiopia", code: "ET", regions: ["Addis Ababa", "Dire Dawa", "Mekelle", "Gondar"] },
-  { name: "Finland", code: "FI", regions: ["Helsinki", "Espoo", "Tampere", "Vantaa"] },
-  { name: "Ghana", code: "GH", regions: ["Accra", "Kumasi", "Tamale", "Sekondi-Takoradi"] },
-  { name: "Greece", code: "GR", regions: ["Athens", "Thessaloniki", "Patras", "Heraklion"] },
-  { name: "Hungary", code: "HU", regions: ["Budapest", "Debrecen", "Szeged", "Miskolc"] },
-  { name: "Iceland", code: "IS", regions: ["Reykjavik", "Kópavogur", "Hafnarfjörður", "Akureyri"] },
   { name: "Indonesia", code: "ID", regions: ["Jakarta", "Surabaya", "Bandung", "Medan"] },
   { name: "Iran", code: "IR", regions: ["Tehran", "Mashhad", "Isfahan", "Karaj"] },
   { name: "Iraq", code: "IQ", regions: ["Baghdad", "Basra", "Mosul", "Erbil"] },
   { name: "Ireland", code: "IE", regions: ["Dublin", "Cork", "Limerick", "Galway"] },
   { name: "Israel", code: "IL", regions: ["Jerusalem", "Tel Aviv", "Haifa", "Rishon LeZion"] },
   { name: "Italy", code: "IT", regions: ["Rome", "Milan", "Naples", "Turin"] },
+  {
+    name: "Japan",
+    code: "JP",
+    regions: [
+      "Hokkaido", "Tohoku", "Kanto", "Chubu", "Kansai", "Chugoku", "Shikoku", "Kyushu"
+    ]
+  },
   { name: "Jordan", code: "JO", regions: ["Amman", "Zarqa", "Irbid", "Russeifa"] },
   { name: "Kazakhstan", code: "KZ", regions: ["Almaty", "Nur-Sultan", "Shymkent", "Aktobe"] },
   { name: "Kenya", code: "KE", regions: ["Nairobi", "Mombasa", "Kisumu", "Nakuru"] },
@@ -157,7 +125,16 @@ export const COUNTRIES: Country[] = [
   { name: "Nepal", code: "NP", regions: ["Kathmandu", "Pokhara", "Lalitpur", "Bharatpur"] },
   { name: "Netherlands", code: "NL", regions: ["Amsterdam", "Rotterdam", "The Hague", "Utrecht"] },
   { name: "New Zealand", code: "NZ", regions: ["Auckland", "Wellington", "Christchurch", "Hamilton"] },
-
+  {
+    name: "Nigeria",
+    code: "NG",
+    regions: [
+      "Abia", "Abuja", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno",
+      "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigawa",
+      "Kaduna", "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger",
+      "Ogun", "Ondo", "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara"
+    ]
+  },
   { name: "Norway", code: "NO", regions: ["Oslo", "Bergen", "Stavanger", "Trondheim"] },
   { name: "Pakistan", code: "PK", regions: ["Karachi", "Lahore", "Faisalabad", "Rawalpindi"] },
   { name: "Peru", code: "PE", regions: ["Lima", "Arequipa", "Trujillo", "Chiclayo"] },
@@ -181,6 +158,26 @@ export const COUNTRIES: Country[] = [
   { name: "Turkey", code: "TR", regions: ["Istanbul", "Ankara", "Izmir", "Bursa"] },
   { name: "Ukraine", code: "UA", regions: ["Kyiv", "Kharkiv", "Odesa", "Dnipro"] },
   { name: "United Arab Emirates", code: "AE", regions: ["Dubai", "Abu Dhabi", "Sharjah", "Al Ain"] },
+  {
+    name: "United Kingdom",
+    code: "GB",
+    regions: [
+      "England", "Scotland", "Wales", "Northern Ireland"
+    ]
+  },
+  {
+    name: "United States",
+    code: "US",
+    regions: [
+      "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
+      "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+      "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi",
+      "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico",
+      "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania",
+      "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont",
+      "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "District of Columbia"
+    ]
+  },
   { name: "Uruguay", code: "UY", regions: ["Montevideo", "Salto", "Paysandú", "Las Piedras"] },
   { name: "Venezuela", code: "VE", regions: ["Caracas", "Maracaibo", "Valencia", "Barquisimeto"] },
   { name: "Vietnam", code: "VN", regions: ["Ho Chi Minh City", "Hanoi", "Haiphong", "Da Nang"] },

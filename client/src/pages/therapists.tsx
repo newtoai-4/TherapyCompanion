@@ -106,7 +106,7 @@ export default function Therapists() {
               <div className="w-10 h-10 bg-gradient-to-br from-therapy-teal to-therapy-blue rounded-lg flex items-center justify-center">
                 <Heart className="text-white h-6 w-6" />
               </div>
-              <span className="text-xl font-semibold text-gray-900">MindHaven</span>
+              <span className="text-xl font-semibold text-teal-600">MindHaven</span>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">

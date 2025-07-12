@@ -17,11 +17,85 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Auth middleware
   await setupAuth(app);
 
-  // Auth routes
-  app.get('/api/auth/user', isAuthenticated, isAdminOnly, async (req: any, res) => {
+  // Local auth routes
+  app.post('/api/auth/register', async (req, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const { email, password, firstName, lastName, age, country, region, allowLocationAccess } = req.body;
+      
+      // Check if user already exists
+      const existingUsers = await storage.getUserByEmail?.(email);
+      if (existingUsers) {
+        return res.status(400).json({ message: "User with this email already exists" });
+      }
+      
+      // Create new user with a generated ID
+      const userId = `user_${Date.now()}_${Math.random().toString(36).substring(2)}`;
+      const newUser = await storage.upsertUser({
+        id: userId,
+        email,
+        firstName,
+        lastName,
+        age,
+        country,
+        region,
+        allowLocationAccess,
+        profileImageUrl: null,
+        isAdmin: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      });
+      
+      // Set session
+      (req as any).session.userId = userId;
+      res.json({ message: "Registration successful", user: newUser });
+    } catch (error) {
+      console.error("Registration error:", error);
+      res.status(500).json({ message: "Registration failed" });
+    }
+  });
+
+  app.post('/api/auth/login', async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      
+      // For demo purposes, we'll accept any password with a valid email
+      // In production, you would verify the password hash
+      const user = await storage.getUserByEmail?.(email);
+      if (!user) {
+        return res.status(401).json({ message: "Invalid credentials" });
+      }
+      
+      // Set session
+      (req as any).session.userId = user.id;
+      res.json({ message: "Login successful", user });
+    } catch (error) {
+      console.error("Login error:", error);
+      res.status(500).json({ message: "Login failed" });
+    }
+  });
+
+  app.post('/api/auth/logout', (req, res) => {
+    (req as any).session.destroy((err: any) => {
+      if (err) {
+        return res.status(500).json({ message: "Logout failed" });
+      }
+      res.json({ message: "Logout successful" });
+    });
+  });
+
+  // Auth routes
+  app.get('/api/auth/user', async (req: any, res) => {
+    try {
+      const userId = req.session?.userId;
+      if (!userId) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+      
       const user = await storage.getUser(userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
       res.json(user);
     } catch (error) {
       console.error("Error fetching user:", error);
@@ -30,12 +104,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Admin route to promote user to admin (for initial setup)
-  app.post('/api/admin/promote-self', isAuthenticated, async (req: any, res) => {
+  app.post('/api/admin/promote-self', async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
-      const userEmail = req.user.claims.email;
+      const userId = req.session?.userId;
+      if (!userId) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
       
-      // Only allow the first user or specific email to become admin
       const existingUser = await storage.getUser(userId);
       if (!existingUser) {
         return res.status(404).json({ message: "User not found" });
@@ -55,7 +130,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Therapist routes
-  app.get('/api/therapists', isAdminOnly, async (req, res) => {
+  app.get('/api/therapists', async (req, res) => {
     try {
       const { specialization, location, availability } = req.query;
       const therapists = await storage.getTherapists({
@@ -86,7 +161,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Therabot chat routes
   app.post('/api/chat/therabot', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.session.userId;
       const { messages } = req.body;
 
       if (!messages || !Array.isArray(messages)) {
@@ -117,7 +192,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Mood tracking routes
   app.post('/api/mood', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.session.userId;
       const validatedData = insertMoodEntrySchema.parse({ ...req.body, userId });
       const moodEntry = await storage.createMoodEntry(validatedData);
       res.json(moodEntry);
@@ -129,7 +204,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get('/api/mood', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.session.userId;
       const limit = req.query.limit ? parseInt(req.query.limit as string) : 30;
       const moodEntries = await storage.getUserMoodEntries(userId, limit);
       res.json(moodEntries);
@@ -142,7 +217,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Journal routes
   app.post('/api/journal', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.session.userId;
       const { content, title, isPrivate } = req.body;
 
       // Generate AI summary
@@ -166,7 +241,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get('/api/journal', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.session.userId;
       const journalEntries = await storage.getUserJournalEntries(userId);
       res.json(journalEntries);
     } catch (error) {
@@ -192,7 +267,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post('/api/community/posts', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.session.userId;
       const validatedData = insertCommunityPostSchema.parse({ ...req.body, userId });
       const post = await storage.createCommunityPost(validatedData);
       res.json(post);
@@ -215,7 +290,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post('/api/community/posts/:id/comments', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.session.userId;
       const postId = parseInt(req.params.id);
       const validatedData = insertCommunityCommentSchema.parse({
         ...req.body,
@@ -233,7 +308,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Therapist request routes
   app.post('/api/therapist-requests', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.session.userId;
       const { therapistId, message } = req.body;
 
       // Get user's recent AI sessions for summary
@@ -264,7 +339,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // User sessions routes
   app.get('/api/sessions', isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.session.userId;
       const sessions = await storage.getUserSessions(userId);
       res.json(sessions);
     } catch (error) {

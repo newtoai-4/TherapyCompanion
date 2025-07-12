@@ -1,18 +1,25 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import { AuthModal } from "@/components/ui/auth-modal";
 import { Heart, Users, UserRound, Brain, Shield, Lock } from "lucide-react";
 
 export default function Landing() {
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
+
   const handleGetStarted = () => {
-    window.location.href = "/api/login";
+    setAuthMode('register');
+    setIsAuthModalOpen(true);
   };
 
   const handleSignIn = () => {
-    window.location.href = "/api/login";
+    setAuthMode('login');
+    setIsAuthModalOpen(true);
   };
 
   return (
@@ -256,6 +263,14 @@ export default function Landing() {
           </div>
         </div>
       </footer>
+
+      {/* Authentication Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        mode={authMode}
+        onModeChange={setAuthMode}
+      />
     </div>
   );
 }

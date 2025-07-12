@@ -166,7 +166,7 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              How MindBridge Supports Your Healing Journey
+              How MindHaven Supports Your Healing Journey
             </h2>
             <p className="text-xl text-therapy-gray max-w-3xl mx-auto">
               Our platform combines empathetic AI guidance with licensed professional support to help you take the first step toward healing.
@@ -210,7 +210,7 @@ export default function Landing() {
                 <div className="w-10 h-10 bg-gradient-to-br from-therapy-teal to-therapy-blue rounded-lg flex items-center justify-center">
                   <Heart className="text-white h-6 w-6" />
                 </div>
-                <span className="text-xl font-semibold">MindBridge</span>
+                <span className="text-xl font-semibold text-teal-600">MindHaven</span>
               </div>
               
               <p className="text-gray-300 mb-6 max-w-md">

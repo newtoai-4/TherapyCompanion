@@ -143,7 +143,7 @@ export function AuthModal({ isOpen, onClose, mode, onModeChange }: AuthModalProp
               <Brain className="h-6 w-6 text-blue-500" />
               <Users className="h-6 w-6 text-green-500" />
             </div>
-            MindBridge
+            MindHaven
           </DialogTitle>
         </DialogHeader>
 

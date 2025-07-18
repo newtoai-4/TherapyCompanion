@@ -56,11 +56,7 @@ export function AuthModal({ isOpen, onClose, mode, onModeChange }: AuthModalProp
 
   const loginMutation = useMutation({
     mutationFn: async (data: LoginData) => {
-      return await apiRequest("/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" }
-      });
+      return await apiRequest("POST", "/api/auth/login", data);
     },
     onSuccess: () => {
       toast({
@@ -81,11 +77,7 @@ export function AuthModal({ isOpen, onClose, mode, onModeChange }: AuthModalProp
 
   const registerMutation = useMutation({
     mutationFn: async (data: RegisterData) => {
-      return await apiRequest("/api/auth/register", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" }
-      });
+      return await apiRequest("POST", "/api/auth/register", data);
     },
     onSuccess: () => {
       toast({

@@ -103,3 +103,15 @@ Preferred communication style: Simple, everyday language.
 - **HTTPS**: Secure cookies and HTTPS-only session configuration
 - **CORS**: Proper cross-origin resource sharing configuration
 - **Input Validation**: Zod schemas for request validation and sanitization
+
+## Recent Changes
+
+**July 18, 2025 - Migration & Error Fixes:**
+- ✅ Successfully migrated project from Replit Agent to Replit environment
+- ✅ Created PostgreSQL database and applied schema migrations
+- ✅ Fixed authentication system with both local and Replit OAuth support
+- ✅ Implemented mock AI service as OpenAI alternative with intelligent responses
+- ✅ Fixed API request issues in authentication modal
+- ✅ Added comprehensive error handling and user feedback
+- ✅ Created sample therapist data and community posts
+- ✅ Verified all core functionality: auth, AI chat, therapist listings, community features
